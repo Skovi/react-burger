@@ -1,0 +1,124 @@
+.container {
+    box-sizing: border-box;
+    width: 600px;
+    display: flex;
+    max-height: 912px;
+}
+
+.constructorList {
+    overflow-y: scroll;
+    max-height: 812px;
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    align-self: start;
+}
+
+.constructorList::-webkit-scrollbar {
+    background-color: #2F2F37;
+    max-height: 460px;
+    width: 8px;
+}
+
+.constructorList::-webkit-scrollbar-thumb {
+    background-color: #8585AD;;
+    border-radius: 0;
+}
+
+.listOrders {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 656px;
+}
+
+.topBun {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 32px 16px 24px;
+    height: 48px;
+    width: 480px;
+    border-radius: 88px 88px 40px 40px;
+}
+
+.ingredients {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 32px 16px 24px;
+    height: 48px;
+    width: 480px;
+    border-radius: 40px;
+}
+
+.item {
+    width: 568px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.bottomBun {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 32px 16px 24px;
+    height: 48px;
+    width: 480px;
+    border-radius: 40px 40px 88px 88px;
+}
+
+.point {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 568px;
+    height: 80px;
+}
+
+.value {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    width: 568px;
+    height: 64px;
+    margin: auto;
+}
+
+.valueCurrent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0px;
+    width: 119px;
+    height: 64px;
+    font-family: Iceland;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 36px;
+}
+
+.totalCost {
+    display: flex;
+    flex-direction: row;
+    height: 64px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.totalValue {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 119px;
+}
