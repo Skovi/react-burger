@@ -64,10 +64,22 @@
 .h2 {
     width: 90%;
     height: 30px;
+    text-align: left;
 }
 
 .counter {
     position: relative;
     top: 0;
     left: 100px;
+}
+
+p {
+    text-align: center;
+    
+}
+
+.price {
+    align-items: center;
+    align-content: center;
+    display: flex;
 }

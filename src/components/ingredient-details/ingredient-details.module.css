@@ -1,0 +1,30 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 520px;
+    margin: auto;
+}
+
+.compound {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+h2 {
+    margin: auto;
+    text-align: center;
+}
+
+.cal {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 56px;
+}
+
+.img {
+    height: 240px;
+    width: 520px;
+}

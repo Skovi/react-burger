@@ -1,0 +1,22 @@
+.content {
+    width: 640px;
+    display: flex;
+    border-radius: 40px;
+    background: #1C1C21;
+    position: absolute;
+    left: 30%;
+    top: 25%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close {
+    display: flex;
+    justify-content: flex-end;
+}
