@@ -1,36 +1,42 @@
-import React from "react";
+import { useEffect } from 'react';
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
+import { useSelector } from 'react-redux';
 
-export const Modal = ({ active, setActive, children, isVisible }) => {
-    return ReactDOM.createPortal(
-        <>
-            <ModalOverlay active={active} setActive={setActive} />
-            <div className={`${styles.content} p-10 pb-15`} onClick={(e) => e.stopPropagation()}>
-                {isVisible ? (
-                    <div className={styles.header}>
-                        <p className="text text_type_main-medium">Детали ингредиента</p>
-                        <CloseIcon type="primary" onClick={() => setActive(false)} />
-                    </div>
-                ) : (
-                    <div className={styles.close}>
-                        <CloseIcon type="primary" onClick={() => setActive(false)} />
-                    </div>
-                )}
+export const Modal = ({ children }) => {
+  const requestClose = useSelector(store => store.modal.callback);
 
-                {children}
-            </div>
-        </>,
-        document.getElementById("root")
-    );
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        requestClose && requestClose();
+      }
+    }
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => { window.removeEventListener('keydown', handleEsc); }
+  }, [requestClose]);
+
+  return ReactDOM.createPortal(
+    <>
+      <ModalOverlay requestClose={requestClose} />
+      <div className={`${styles.content} p-10 pb-15`} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.close} >
+          <CloseIcon type="primary" onClick={(e) => requestClose(e)} />
+        </div>
+        <div>
+          {children}
+        </div>
+      </div>
+    </>,
+    document.getElementById("modals")
+  );
 };
 
 Modal.propTypes = {
-    active: PropTypes.bool.isRequired,
-    setActive: PropTypes.func.isRequired,
-    children: PropTypes.any.isRequired,
-    isVisible: PropTypes.bool,
-};
+  children: PropTypes.element.isRequired,
+}

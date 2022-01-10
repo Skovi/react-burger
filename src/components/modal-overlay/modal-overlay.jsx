@@ -1,27 +1,19 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import styles from "./modal-overlay.module.css";
+import PropTypes from "prop-types";
 
-export const ModalOverlay = ({ active, setActive }) => {
-    useEffect(() => {
-        const close = (e) => {
-            if (e.keyCode === 27) {
-                setActive(false);
-            }
-        };
-        window.addEventListener("keydown", close);
-        return () => window.removeEventListener("keydown", close);
-    }, []);
-
-    return (
-        <div
-            className={active ? `${styles.active} ${styles.overlay}` : `${styles.overlay}`}
-            onClick={() => setActive(false)}
-        ></div>
-    );
+export const ModalOverlay = ({ children, requestClose }) => {
+  
+  return (
+    <div
+      className={styles.overlay}
+      onClick={(e) => requestClose(e)}
+    >
+      {children}
+    </div>
+  );
 };
 
 ModalOverlay.propTypes = {
-    active: PropTypes.bool.isRequired,
-    setActive: PropTypes.func.isRequired,
+  children: PropTypes.element,
+  requestClose: PropTypes.func
 };

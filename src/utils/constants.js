@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
- const menuItemPropTypes = PropTypes.shape({
+ export const menuItemPropTypes = PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -15,4 +15,25 @@ import PropTypes from "prop-types";
     __v: PropTypes.number.isRequired,
 });
 
-export default menuItemPropTypes
+export const initialState = {
+  isLoading: false,
+  hasError: false,
+  loaded: false,
+  allIngredients: {},
+  burgerIngredients: {
+    bun: null,
+    notBun: [],
+    counts: {}
+  },
+  currentOrder: null,
+  currentBurger: null,
+  orderRequest: false,
+  orderFailed: false,
+};
+
+export const apiCreateOrger = {
+    url: 'https://norma.nomoreparties.space/api',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
