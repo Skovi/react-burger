@@ -1,0 +1,54 @@
+.container {
+    width: 600px;
+    display: flex;
+    /* max-height: 912px; */
+    flex-direction: column;
+}
+
+.constructorList {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    align-self: start;
+}
+
+.scroll {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    max-height: 500px;
+}
+
+.scroll::-webkit-scrollbar {
+    background-color: #2F2F37;
+    width: 8px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #8585AD;;
+    border-radius: 0;
+}
+
+.item {
+    width: 568px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.totalCost {
+    display: flex;
+    flex-direction: row;
+    height: 64px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.totalValue {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 119px;
+}

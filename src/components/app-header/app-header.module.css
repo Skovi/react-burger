@@ -1,0 +1,86 @@
+.header {
+    display: flex;
+    justify-content: center;
+    background-color: #1C1C21;
+    align-items: center;
+    height: 88px;
+}
+
+.content {
+    width: 1240px;
+    height: 56px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Первые две кнопки */
+.twoA {
+    width: 375px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.firstCont {
+    display: flex;
+    align-items: center;
+    width: 178px;
+    height: 56px;
+}
+
+.firstA {
+    background: #1C1C21;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #F2F2F3;
+    padding: 0;
+    }
+
+.secondCont {
+    width: 197px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    margin: 0px 8px;
+    background-color: #1C1C21;
+}
+
+.secondA {
+    padding: 16px 20px;
+    background-color: #1C1C21;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #8585AD;
+    padding: 0;
+}
+
+
+.logo {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.thirdCont {
+    width: 207px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 185px;
+}
+
+.thirdA {
+    padding: 16px 20px;
+    background: #1C1C21;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #8585AD;
+    padding: 0;
+}

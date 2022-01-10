@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 1240px;
+    margin: 0 auto;
+    justify-content:space-between;
+}
+
+a {
+    text-decoration: none;
+    color: #F2F2F3;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0;
+}
