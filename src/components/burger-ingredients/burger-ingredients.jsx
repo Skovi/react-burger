@@ -1,95 +1,62 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Counter, CurrencyIcon, Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useState, useRef, useEffect } from "react";
 import styles from "./burger-ingredients.module.css";
+import { useSelector, useDispatch } from 'react-redux';
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import menuItemPropTypes from "../../utils/constants";
-import { Modal } from "../modal/modal";
+import { CURRENT_BURGER } from "../../services/actions/items";
+import { OPEN_MODAL, CLOSE_MODAL } from "../../services/actions/modal";
+import { BurgerIngredientsList } from "../burger-ingredients-list/burger-ingredients-list";
+import { Tabs } from "../tabs/tabs";
 
-const BUN_TYPE = "bun";
-const SAUCE_TYPE = "sauce";
-const MAIN_TYPE = "main";
+export const BurgerIngredients = () => {
 
-export const BurgerIngredients = ({ data }) => {
-    const [current, setCurrent] = useState("bun");
-    const [modalActive, setModalActive] = useState(false);
-    const [element, setElement] = useState({});
-    const isVisible = true;
+  const { bun, sauce, main } = useSelector(store => store.items.allIngredients);
 
-    const setClick = (e) => {
-        setCurrent(e);
-    };
+  const dispatch = useDispatch();
 
-    const getElement = (el) => {
-        setModalActive(true);
-        setElement(el);
-    };
+  const [type, setType] = useState('bun');
 
-    function filterArr(arr, type) {
-        let array = arr.filter((el) => el.type === type);
-        let category = "";
+  useEffect(() => {
+    document.querySelector(`#${type}`).scrollIntoView();
+  }, [type]);
 
-        if (type === BUN_TYPE) {
-            category = "Булки";
-        } else if (type === SAUCE_TYPE) {
-            category = "Соусы";
-        } else if (type === MAIN_TYPE) {
-            category = "Начинки";
-        }
+  const rootRef = useRef(null);
+  const bunRef = useRef(null);
+  const sauceRef = useRef(null);
+  const mainRef = useRef(null);
 
-        const list = array.map((el) => (
-            <li className={styles.li} key={el._id} id={el._id} onClick={() => getElement(el)}>
-                <div className={styles.counter}>
-                    <Counter count={1} size="default" />
-                </div>
-                <img src={el.image} />
-                <div className={styles.price}>
-                    <p className="text text_type_digits-default pr-2">{el.price}</p>
-                    <CurrencyIcon type="primary" />
-                </div>
-                <p className="text text_type_main-default">{el.name}</p>
-            </li>
-        ));
+  const handlerScroll = () => {
+    const bunType = Math.abs(rootRef.current.getBoundingClientRect().top - bunRef.current.getBoundingClientRect().top);
+    const sauceType = Math.abs(rootRef.current.getBoundingClientRect().top - sauceRef.current.getBoundingClientRect().top);
+    const mainType = Math.abs(rootRef.current.getBoundingClientRect().top - mainRef.current.getBoundingClientRect().top);
+    const minType = Math.min(bunType, sauceType, mainType);
+    const currentType = minType === bunType ? 'bun' : minType === sauceType ? 'sauces' : 'main';
+    setType(type => currentType === type ? type : currentType);
+  };
 
-        return (
-            <>
-                <h2 className={`${styles.h2} text text_type_main-medium`} id={type}>
-                    {category}
-                </h2>
-                <ul className={styles.ul}>{list}</ul>
-            </>
-        );
-    }
+  const modal = (item) => {
+    dispatch({
+      type: CURRENT_BURGER,
+      item
+    })
+    dispatch({
+      type: OPEN_MODAL,
+      content: <IngredientDetails item={item} />,
+      callback: () => {
+        dispatch({ type: CLOSE_MODAL })
+      }
+    })
+  };
 
-    return (
-        <div className={styles.container}>
-            <p className="text text_type_main-large pt-10 pb-5">Соберите бургер</p>
-            <div style={{ display: "flex" }} className="pb-10">
-                <Tab value="bun" active={current === "bun"} onClick={setClick}>
-                    Булки
-                </Tab>
-                <Tab value="sauce" active={current === "sauce"} onClick={setClick}>
-                    Соусы
-                </Tab>
-                <Tab value="toppings" active={current === "toppings"} onClick={setClick}>
-                    Начинки
-                </Tab>
-            </div>
+  return (
+    <section className={styles.container}>
+      <h1 className={`text_type_main-large mb-5`}>Соберите бургер</h1>
+      <Tabs type={type} onClick={setType} />
 
-            <div className={`${styles.ingredients}`} id="ingredients">
-                {data && filterArr(data, "bun")}
-                {data && filterArr(data, "sauce")}
-                {data && filterArr(data, "main")}
-            </div>
-            {modalActive && (
-                <Modal active={modalActive} setActive={setModalActive} li={element} isVisible={isVisible}>
-                    <IngredientDetails li={element}/>
-                </Modal>
-            )}
-        </div>
-    );
-};
-
-BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(menuItemPropTypes)
+      <section className={styles.containerIngredients} ref={rootRef} onScroll={handlerScroll}>
+        <BurgerIngredientsList title='Булки' array={bun} id="bun" modal={modal} ref={bunRef} />
+        <BurgerIngredientsList title='Соусы' array={sauce} id='sauces' modal={modal} ref={sauceRef} />
+        <BurgerIngredientsList title='Начинки' array={main} id='main' modal={modal} ref={mainRef} />
+      </section>
+    </section>
+  )
 };

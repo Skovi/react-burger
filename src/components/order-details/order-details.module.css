@@ -1,12 +1,14 @@
 .content {
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    justify-content: center;
-    max-height: 718px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: center;
+  max-height: 718px;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .image {
-    width: 120px;
-    margin: auto;
+  width: 120px;
+  margin: auto;
 }

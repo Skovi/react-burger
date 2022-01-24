@@ -1,0 +1,11 @@
+.item {
+	width: 100%;
+	list-style-type: none;
+	display: flex;
+	align-items: center;
+	cursor: move;
+	height: 80px;
+	margin-left: 4px;
+	display: flex;
+	flex-direction: row;
+}
