@@ -5,40 +5,59 @@ import {
   ProfileIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const AppHeader = () => {
+  const { pathname } = useLocation();
+
+  const iconBurger = pathname === "/" ? "primary" : "secondary";
+  const iconProfile = pathname === "/profile" ? "primary" : "secondary";
+  const iconFeed = pathname === "/order-feed" ? "primary" : "secondary";
 
   return (
     <header>
       <nav className={styles.content}>
         <div className={styles.twoA}>
           <div className={styles.firstCont}>
-            <BurgerIcon type="primary" />
-            <a href="#" className={`${styles.firstA} text text_type_main-default ml-2`}>
+            <BurgerIcon type={iconBurger} />
+            <NavLink
+              to='/'
+              exact
+              className={` text text_type_main-default text_color_inactive ml-2`}
+              activeClassName={styles.linkActive}
+            >
               Конструктор
-            </a>
+            </NavLink>
           </div>
 
           <div className={styles.secondCont}>
-            <ListIcon type="secondary" />
-            <a
-              href="#"
-              className={`${styles.secondA} text text_type_main-default text_color_inactive ml-2`}
+            <ListIcon type={iconFeed} />
+            <NavLink
+              to='/order-feed'
+              className={` text text_type_main-default text_color_inactive ml-2`}
+              activeClassName={styles.linkActive}
             >
               Лента заказов
-            </a>
+            </NavLink>
           </div>
         </div>
 
-        <div className={styles.logo}>
+        <NavLink
+          to='/'
+          className={styles.logo}
+        >
           <Logo />
-        </div>
+        </NavLink>
 
         <div className={styles.thirdCont}>
-          <ProfileIcon type="secondary" />
-          <a href="#" className={`${styles.thirdA} text text_type_main-default text_color_inactive ml-2`}>
+          <ProfileIcon type={iconProfile} />
+          <NavLink
+            to='/profile'
+            className={`${styles.thirdA} text text_type_main-default text_color_inactive ml-2`}
+            activeClassName={styles.linkActive}
+          >
             Личный кабинет
-          </a>
+          </NavLink>
         </div>
       </nav>
     </header>

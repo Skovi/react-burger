@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+  ConstructorElement,
+  DragIcon
+} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-item.module.css';
 import { menuItemPropTypes } from "../../utils/constants";
 import { useRef } from 'react';

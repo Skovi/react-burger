@@ -1,12 +1,12 @@
 import styles from "./modal-overlay.module.css";
 import PropTypes from "prop-types";
 
-export const ModalOverlay = ({ children, requestClose }) => {
-  
+export const ModalOverlay = ({ children, onCloseGoBack }) => {
+
   return (
     <div
       className={styles.overlay}
-      onClick={(e) => requestClose(e)}
+      onClick={onCloseGoBack}
     >
       {children}
     </div>
@@ -15,5 +15,5 @@ export const ModalOverlay = ({ children, requestClose }) => {
 
 ModalOverlay.propTypes = {
   children: PropTypes.element,
-  requestClose: PropTypes.func
+  onCloseGoBack: PropTypes.func.isRequired,
 };
