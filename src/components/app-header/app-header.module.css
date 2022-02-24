@@ -88,3 +88,7 @@ header {
 a {
   text-decoration: none;
 }
+
+.linkActive {
+  color: #f2f2f3;
+}

@@ -6,24 +6,30 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import { OrderDetails } from "../order-details/order-details";
-import { useSelector, useDispatch } from 'react-redux';
+import {
+  useSelector,
+  useDispatch
+} from 'react-redux';
 import {
   DELETE_ITEM,
   DECREASE_ITEM,
   UPDATE_CONSTRUCTOR,
-  CLEAR_CONSTRUCTOR,
-} from "../../services/actions/items";
+} from "../../services/actions/ingredients";
 import { calculationTotalCost } from "../../utils/functions";
 import { createOrder } from "../../services/actions/order";
-import { OPEN_MODAL, CLOSE_MODAL } from '../../services/actions/modal';
+import { CLOSE_MODAL, OPEN_MODAL } from '../../services/actions/modal';
 import { BurgerItem } from '../burger-item/burger-item';
 import { TotalCost } from "../total-cost/total-cost";
 import { useDrop } from 'react-dnd';
+import { useHistory } from "react-router-dom";
+import { Modal } from "../modal/modal";
 
 export const BurgerConstructor = ({ handlerDrop }) => {
-  const { bun, notBun } = useSelector(store => store.items.burgerIngredients);
+  const { bun, notBun } = useSelector(store => store.ingredients.burgerIngredients);
+  const { visible } = useSelector(store => store.modal)
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const moveItem = useCallback((dragIndex, hoverIndex) => {
     dispatch({
@@ -44,21 +50,24 @@ export const BurgerConstructor = ({ handlerDrop }) => {
     }),
   });
 
+  const { isAuth } = useSelector(store => store.user);
+
   const handlerClick = () => {
-    const ingredients_id = notBun.map(el => el._id)
-    dispatch(
-      createOrder(
-        [bun._id, ...ingredients_id]
-      )
-    );
-    dispatch({
-      type: OPEN_MODAL,
-      content: <OrderDetails />,
-      callback: () => {
-        dispatch({ type: CLOSE_MODAL });
-        dispatch({ type: CLEAR_CONSTRUCTOR});
-      }
-    });
+    if (isAuth) {
+      const ingredients_id = notBun.map(el => el._id)
+      dispatch(
+        createOrder(
+          [bun._id, ...ingredients_id]
+        )
+      );
+      dispatch({
+        type: OPEN_MODAL,
+        callback: () => dispatch({ type: CLOSE_MODAL }),
+      });
+    } else {
+      history.replace({ pathname: "/login" });
+      return;
+    };
   };
 
   const style = notBun.length > 4 ? { overflowY: 'auto' } : {};
@@ -146,7 +155,7 @@ export const BurgerConstructor = ({ handlerDrop }) => {
           </Button>
         }
       </div>
-
+      {visible && <Modal><OrderDetails /></Modal>}
     </div>
   )
 };

@@ -1,28 +1,21 @@
 import { OPEN_MODAL, CLOSE_MODAL } from '../actions/modal';
+import { stateModal } from '../initial-state/state-modal';
 
-const initialState = {
-  visible: false,
-  content: null,
-  callback: null,
-};
-
-export const modalReducer = (state = initialState, action) => {
+export const modalReducer = (state = stateModal, action) => {
   switch (action.type) {
-    
+
     case OPEN_MODAL: {
       return {
         visible: true,
-        content: action.content,
-        callback: action.callback,
+        callback: action.callback
       };
     }
 
     case CLOSE_MODAL: {
       return {
         visible: false,
-        content: null,
         callback: null,
-    };
+      };
     }
 
     default: {

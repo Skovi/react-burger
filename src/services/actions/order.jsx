@@ -1,30 +1,28 @@
-import { addOrder } from '../../utils/api';
+import { addOrderRequest } from '../../utils/api';
+import { createOrderFailed } from './action-cteators/order';
+import { CLEAR_CONSTRUCTOR } from './ingredients';
 
 export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
 export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
-export const CREATE_ORDER_FAILED = 'CREATE_ORDER_FAILED';
 
 export const createOrder = (ingredients_id) => {
   return function (dispatch) {
     dispatch({
       type: CREATE_ORDER_REQUEST
     });
-    addOrder(ingredients_id).then((res) => {
+    addOrderRequest(ingredients_id).then((res) => {
       if (res && res.success) {
         dispatch({
           type: CREATE_ORDER_SUCCESS,
           order: res
         });
+        dispatch({ type: CLEAR_CONSTRUCTOR });
       } else {
-        dispatch({
-          type: CREATE_ORDER_FAILED
-        });
+        dispatch(createOrderFailed());
       }
     }).catch(err => {
       console.log(err)
-      dispatch({
-        type: CREATE_ORDER_FAILED
-      });
+      dispatch(createOrderFailed());
     })
   };
 };

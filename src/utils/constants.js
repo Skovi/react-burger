@@ -1,39 +1,24 @@
 import PropTypes from "prop-types";
 
- export const menuItemPropTypes = PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    calories: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired,
+export const menuItemPropTypes = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  image_mobile: PropTypes.string.isRequired,
+  image_large: PropTypes.string.isRequired,
+  __v: PropTypes.number.isRequired,
 });
 
-export const initialState = {
-  isLoading: false,
-  hasError: false,
-  loaded: false,
-  allIngredients: {},
-  burgerIngredients: {
-    bun: null,
-    notBun: [],
-    counts: {}
+export const apiNorma = {
+  url: 'https://norma.nomoreparties.space/api',
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: "application/json"
   },
-  currentOrder: null,
-  currentBurger: null,
-  orderRequest: false,
-  orderFailed: false,
 };
-
-export const apiCreateOrger = {
-    url: 'https://norma.nomoreparties.space/api',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  };

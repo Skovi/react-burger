@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  align-self: flex-end;
+}
+
+.button {
+  font-family: 'Jet Brains Mono';
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: normal;
+  padding: 16px 40px;
+  color: #4c4cff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 64px;
+  transition: all .3s ease-in;
+}

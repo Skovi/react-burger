@@ -4,29 +4,40 @@ import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
+import { useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 export const Modal = ({ children }) => {
-  const requestClose = useSelector(store => store.modal.callback);
+
+  const history = useHistory();
+
+  const { visible, callback } = useSelector(store => store.modal);
+
+  const onCloseGoBack = () => {
+    if (visible) {
+      callback();
+    } else {
+      history.goBack();
+    };
+  };
+
+  const handleEsc = (e) => {
+    if (e.key === 'Escape') {
+      onCloseGoBack();
+    }
+  };
 
   useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') {
-        requestClose && requestClose();
-      }
-    }
-
     window.addEventListener('keydown', handleEsc);
-
     return () => { window.removeEventListener('keydown', handleEsc); }
-  }, [requestClose]);
+  }, [handleEsc]);
 
   return ReactDOM.createPortal(
     <>
-      <ModalOverlay requestClose={requestClose} />
-      <div className={`${styles.content} p-10 pb-15`} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.close} >
-          <CloseIcon type="primary" onClick={(e) => requestClose(e)} />
+      <ModalOverlay onCloseGoBack={onCloseGoBack} />
+      <div className={`${styles.content} p-10 pb-15`} >
+        <div className={styles.close} onClick={onCloseGoBack}>
+          <CloseIcon type="primary" />
         </div>
         <div>
           {children}
@@ -39,4 +50,4 @@ export const Modal = ({ children }) => {
 
 Modal.propTypes = {
   children: PropTypes.element.isRequired,
-}
+};

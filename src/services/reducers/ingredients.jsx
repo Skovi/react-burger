@@ -1,20 +1,18 @@
-import { initialState } from "../../utils/constants";
+import { stateIngredients } from "../initial-state/state-ingredients";
 import {
   GET_ITEMS_REQUEST,
   GET_ITEMS_SUCCESS,
-  GET_ITEMS_FAILED,
 
   ADD_ITEM,
   DELETE_ITEM,
-  CURRENT_BURGER,
   INCREASE_ITEM,
   DECREASE_ITEM,
   UPDATE_CONSTRUCTOR,
   CLEAR_CONSTRUCTOR,
-} from '../actions/items';
+} from '../actions/ingredients';
+import { GET_ITEMS_FAILED } from "../actions/action-cteators/ingredients";
 
-
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = stateIngredients, action) => {
   switch (action.type) {
 
     case GET_ITEMS_REQUEST: {
@@ -75,13 +73,6 @@ export const ingredientsReducer = (state = initialState, action) => {
           ...state.burgerIngredients,
           notBun: [...state.burgerIngredients.notBun].filter(el => el.productId !== action.id)
         }
-      };
-    }
-
-    case CURRENT_BURGER: {
-      return {
-        ...state,
-        currentBurger: action.item
       };
     }
 

@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
 import styles from './main.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/actions/items';
-import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
-import { BurgerConstructor } from '../burger-constructor/burger-constructor';
-import { Modal } from '../modal/modal';
-import { INCREASE_ITEM, ADD_ITEM } from "../../services/actions/items";
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
+import { getIngredients } from '../../services/actions/ingredients';
+import { BurgerIngredients } from '../../components/burger-ingredients/burger-ingredients';
+import { BurgerConstructor } from '../../components/burger-constructor/burger-constructor';
+import { INCREASE_ITEM, ADD_ITEM } from "../../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { v4 as uuidv4 } from 'uuid';
 
 export const Main = () => {
-  const { visible, content } = useSelector(store => store.modal);
-  const { isLoading, hasError, loaded } = useSelector(store => store.items);
+  const { isLoading, hasError, loaded } = useSelector(store => store.ingredients);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +48,6 @@ export const Main = () => {
           </div>
         </DndProvider>
       }
-      {visible && <Modal>{content}</Modal>}
     </main >
   );
 };
