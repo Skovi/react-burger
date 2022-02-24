@@ -6,6 +6,7 @@ export const CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST';
 export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
 
 export const createOrder = (ingredients_id) => {
+  console.log(ingredients_id)
   return function (dispatch) {
     dispatch({
       type: CREATE_ORDER_REQUEST

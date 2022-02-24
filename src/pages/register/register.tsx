@@ -19,7 +19,7 @@ import { register } from "../../services/actions/user";
 export const Register = () => {
   const dispatch = useDispatch();
 
-  const { isAuth } = useSelector(store => store.user);
+  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
 
   const [state, setState] = useState({
     name: '',
@@ -28,20 +28,15 @@ export const Register = () => {
   });
 
   //изменение данных в форме
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  //нажатие на иконку
-  const onIconClick = () => {
-    console.log('Click!');
-  };
-
   //отправка формы
-  const onSubmitForm = e => {
+  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(register(state));
   };
@@ -69,7 +64,6 @@ export const Register = () => {
           errorText={'Ошибка'}
           size={'default'}
           onChange={onChangeInput}
-          onIconClick={onIconClick}
           icon='EditIcon'
         />
         <EmailInput

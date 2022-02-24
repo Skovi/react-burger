@@ -1,17 +1,20 @@
-import { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import { useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
-export const Modal = ({ children }) => {
+type TProps = {
+  children: React.ReactNode
+}
+
+export const Modal: FC<TProps> = ({ children }) => {
 
   const history = useHistory();
 
-  const { visible, callback } = useSelector(store => store.modal);
+  const { visible, callback } = useSelector((store: {modal: {visible: boolean, callback: () => void}}) => store.modal);
 
   const onCloseGoBack = () => {
     if (visible) {
@@ -21,7 +24,7 @@ export const Modal = ({ children }) => {
     };
   };
 
-  const handleEsc = (e) => {
+  const handleEsc = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       onCloseGoBack();
     }
@@ -44,10 +47,6 @@ export const Modal = ({ children }) => {
         </div>
       </div>
     </>,
-    document.getElementById("modals")
+    document.getElementById("modals")!
   );
-};
-
-Modal.propTypes = {
-  children: PropTypes.element.isRequired,
 };

@@ -1,26 +1,30 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './burger-ingredients-list.module.css';
-import PropTypes from 'prop-types';
 import { BurgerIngredient } from '../burger-ingredient/burger-ingredient';
-import { menuItemPropTypes } from "../../utils/constants";
 import { Link, useLocation, } from "react-router-dom";
+import { TIngredient } from '../../types';
 
-export const BurgerIngredientsList = React.forwardRef(({ array, title, id, }, ref) => {
+type TProps = {
+  array: Array<TIngredient>, 
+  title: string, 
+  id: string,
+};
+
+export const BurgerIngredientsList = React.forwardRef<HTMLParagraphElement, TProps>(({ array, title, id }, ref) => {
   const location = useLocation();
 
   return (
     <div className={'mb-10'} >
       <p id={id} ref={ref} className={` text_type_main-medium mb-6`}>{title}</p>
       <ul className={styles.list} >
-        {array.map(item =>
+        {array.map((item: TIngredient) =>
           <Link key={item._id} to={{
-            pathname: `/ingredients/${item._id}`,
+            pathname: `/ingredients/${item._id}`, 
             state: { background: location }
           }}>
             <BurgerIngredient
               item={item}
               id={id}
-
             />
           </Link>
         )}
@@ -28,9 +32,3 @@ export const BurgerIngredientsList = React.forwardRef(({ array, title, id, }, re
     </div>
   )
 });
-
-BurgerIngredientsList.propTypes = {
-  array: PropTypes.arrayOf(menuItemPropTypes).isRequired,
-  title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-};

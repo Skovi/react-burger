@@ -5,9 +5,10 @@ import {
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { getProductsRequest } from '../../utils/api';
+import { TIngredient } from '../../types';
 
 export const IngredientDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams<{id: string}>();
 
   const [burger, setBurger] = useState({
     image: '',
@@ -20,7 +21,7 @@ export const IngredientDetails = () => {
 
   useEffect(() => {
     getProductsRequest().then((res) => {
-      const item = res.data.find(item => item._id === id);
+      const item = res.data.find((item: TIngredient) => item._id === id);
       setBurger({
         image: item.image_large,
         name: item.name,

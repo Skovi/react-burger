@@ -11,16 +11,17 @@ import { INCREASE_ITEM, ADD_ITEM } from "../../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { v4 as uuidv4 } from 'uuid';
+import { TIngredient } from '../../types';
 
 export const Main = () => {
-  const { isLoading, hasError, loaded } = useSelector(store => store.ingredients);
+  const { isLoading, hasError, loaded } = useSelector((store: {ingredients: {isLoading: boolean, hasError: boolean, loaded: boolean}}) => store.ingredients);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch]);
 
-  const handlerDrop = (item) => {
+  const handlerDrop = (item: TIngredient) => {
     dispatch({
       type: ADD_ITEM,
       payload: {

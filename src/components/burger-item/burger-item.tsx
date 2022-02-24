@@ -1,17 +1,29 @@
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import {
   ConstructorElement,
   DragIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-item.module.css';
-import { menuItemPropTypes } from "../../utils/constants";
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { TIngredient } from "../../types";
 
-export const BurgerItem = ({ item, index, deleteIngredient, moveItem }) => {
+export type TIngredientWithProductId = TIngredient & 
+{ productId: string };
+
+type TProps = {
+  item: TIngredientWithProductId, 
+  index: number, 
+  deleteIngredient: () => void, 
+  moveItem: (dragIndex: number, hoverIndex: number) => void
+}
+
+
+
+export const BurgerItem: FC<TProps> = ({ item, index, deleteIngredient, moveItem }) => {
   const id = item._id;
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
   const [, drop] = useDrop({
     accept: 'item',
     collect(monitor) {
@@ -19,7 +31,7 @@ export const BurgerItem = ({ item, index, deleteIngredient, moveItem }) => {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(el, monitor) {
+    hover(el: {id: number, index: number}, monitor) {
       if (!ref.current) {
         return;
       };
@@ -36,7 +48,7 @@ export const BurgerItem = ({ item, index, deleteIngredient, moveItem }) => {
 
       const clientOffset = monitor.getClientOffset();
 
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -75,11 +87,4 @@ export const BurgerItem = ({ item, index, deleteIngredient, moveItem }) => {
       />
     </li>
   )
-};
-
-BurgerItem.propTypes = {
-  item: menuItemPropTypes.isRequired,
-  index: PropTypes.number.isRequired,
-  deleteIngredient: PropTypes.func.isRequired,
-  moveItem: PropTypes.func.isRequired,
 };

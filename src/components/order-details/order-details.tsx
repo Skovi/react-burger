@@ -3,7 +3,7 @@ import Image from "../../image/done.png";
 import { useSelector } from 'react-redux';
 
 export const OrderDetails = () => {
-  const { orderRequest, orderFailed, currentOrder } = useSelector(store => store.order);
+  const { orderRequest, orderFailed, currentOrder } = useSelector((store: {order: {orderRequest: boolean, orderFailed: boolean, currentOrder: any}}) => store.order);
 
   return (
     <>
