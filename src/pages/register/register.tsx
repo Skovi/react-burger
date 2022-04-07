@@ -10,16 +10,16 @@ import {
   PasswordInput,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { register } from "../../services/actions/user/user";
 import {
   useDispatch,
   useSelector,
-} from "react-redux";
-import { register } from "../../services/actions/user";
+} from "../../utils/hooks";
 
 export const Register = () => {
   const dispatch = useDispatch();
 
-  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
+  const { isAuth } = useSelector((store) => store.user);
 
   const [state, setState] = useState({
     name: '',

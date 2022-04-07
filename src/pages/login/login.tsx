@@ -10,22 +10,22 @@ import {
   Redirect,
   useLocation,
 } from "react-router-dom";
-import { login } from '../../services/actions/user';
+import { login } from '../../services/actions/user/user';
 import {
   useDispatch,
   useSelector,
-} from 'react-redux';
+} from "../../utils/hooks";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const location = useLocation<{ from: any }>();
-  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
+  const { isAuth } = useSelector((store) => store.user);
 
   const [state, setState] = useState({
     email: "",
     password: "",
   });
-  
+
   //изменение данных в форме
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -43,7 +43,7 @@ export const Login = () => {
   if (isAuth) {
     return (
       <Redirect
-      to={ location.state?.from.pathname || '/' }
+        to={location.state?.from.pathname || '/'}
       />
     );
   };

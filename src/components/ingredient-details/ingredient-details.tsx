@@ -1,27 +1,28 @@
 import {
+  useEffect,
   useState,
-  useEffect
 } from 'react';
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { getProductsRequest } from '../../utils/api';
 import { TIngredient } from '../../types';
+import { useSelector } from '../../utils/hooks';
 
 export const IngredientDetails = () => {
-  const { id } = useParams<{id: string}>();
+  const { id } = useParams<{ id: string }>();
+  const { allIngredients } = useSelector((store) => store.ingredients);
 
   const [burger, setBurger] = useState({
     image: '',
     name: '',
-    calories: '',
-    proteins: '',
-    fat: '',
-    carbohydrates: '',
+    calories: 0,
+    proteins: 0,
+    fat: 0,
+    carbohydrates: 0,
   });
 
   useEffect(() => {
-    getProductsRequest().then((res) => {
-      const item = res.data.find((item: TIngredient) => item._id === id);
+    const item = allIngredients.find((item: TIngredient) => item._id === id);
+    if (item) {
       setBurger({
         image: item.image_large,
         name: item.name,
@@ -30,15 +31,14 @@ export const IngredientDetails = () => {
         fat: item.fat,
         carbohydrates: item.carbohydrates,
       })
-    }).catch((err) => {
-      console.log(err)
-    })
-  }, [id]);
+    };
+  }, [allIngredients]);
 
   return (
     <div className={styles.content} >
+      <p className="text text_type_main-large">Детали ингредиента</p>
       <div className={`${styles.img} mt-20`}>
-        <img src={burger.image} />
+        <img src={burger.image} alt='Вкусная булочка' />
       </div>
       <h2 className="text text_type_main-large pt-4 pb-8">{burger.name}</h2>
       <div className={styles.compound}>
