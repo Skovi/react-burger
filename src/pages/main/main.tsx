@@ -1,39 +1,34 @@
-import { useEffect } from 'react';
 import styles from './main.module.css';
-import {
-  useSelector,
-  useDispatch,
-} from 'react-redux';
-import { getIngredients } from '../../services/actions/ingredients';
 import { BurgerIngredients } from '../../components/burger-ingredients/burger-ingredients';
 import { BurgerConstructor } from '../../components/burger-constructor/burger-constructor';
-import { INCREASE_ITEM, ADD_ITEM } from "../../services/actions/ingredients";
+import {
+  INCREASE_ITEM,
+  ADD_ITEM,
+} from "../../services/actions/ingredients/action-type-ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '../../types';
+import {
+  useDispatch,
+  useSelector,
+} from '../../utils/hooks';
 
 export const Main = () => {
-  const { isLoading, hasError, loaded } = useSelector((store: {ingredients: {isLoading: boolean, hasError: boolean, loaded: boolean}}) => store.ingredients);
-  const dispatch = useDispatch();
+  const { isLoading, hasError, loaded } = useSelector((store) => store.ingredients);
 
-  useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch]);
+  const dispatch = useDispatch();
 
   const handlerDrop = (item: TIngredient) => {
     dispatch({
       type: ADD_ITEM,
-      payload: {
-        key: uuidv4(),
-        item
-      }
+      key: uuidv4(),
+      item: item
     });
     dispatch({
       type: INCREASE_ITEM,
-      payload: {
-        key: item._id
-      }
+      key: item._id,
+      typeItem: item.type
     });
   };
 

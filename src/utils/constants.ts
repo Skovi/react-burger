@@ -22,3 +22,6 @@ export const apiNorma = {
     Accept: "application/json"
   },
 };
+
+export const SOCKET_URL = 'wss://norma.nomoreparties.space/orders/all';
+export const SOCKET_URL_USER = 'wss://norma.nomoreparties.space/orders';

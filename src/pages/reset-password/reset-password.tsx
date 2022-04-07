@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import styles from "./reset-password.module.css";
-import { Link, Redirect } from 'react-router-dom';
+import {
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import {
   Button,
   Input,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { resetPassword } from "../../services/actions/password/password";
 import {
   useDispatch,
   useSelector,
-} from "react-redux";
-import { resetPassword } from "../../services/actions/password";
+} from '../../utils/hooks';
 
 export const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -39,7 +42,7 @@ export const ResetPassword = () => {
     dispatch(resetPassword(state));
   };
 
-  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
+  const { isAuth } = useSelector((store) => store.user);
 
   if (isAuth) {
     return (

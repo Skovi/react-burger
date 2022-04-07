@@ -4,17 +4,17 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredient.module.css';
-import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { TIngredient } from '../../types';
+import { useSelector } from '../../utils/hooks';
 
 type TProps = {
-  item: TIngredient, 
+  item: TIngredient,
   id: string,
 };
 
 export const BurgerIngredient: FC<TProps> = ({ item, id }) => {
-  const { counts, bun } = useSelector((store: {ingredients: {burgerIngredients: {counts: any, bun: TIngredient} }}) => store.ingredients.burgerIngredients);
+  const { counts, bun } = useSelector((store) => store.ingredients.burgerIngredients);
 
   const isBun = id === 'bun';
 
@@ -24,9 +24,9 @@ export const BurgerIngredient: FC<TProps> = ({ item, id }) => {
     type: 'ingredient',
     item: () => { return item }
   });
-
+  
   return (
-    <li className={styles.card} ref={drag} >
+    <li className={styles.card} ref={drag} data-cy="ingredient">
       <img className={`${styles.image} mb-1`} src={item.image_large} alt={item.name} />
       {count ?
         <Counter count={count} size='small' /> : null

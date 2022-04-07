@@ -4,11 +4,13 @@
   border-radius: 40px;
   background: #1C1C21;
   position: absolute;
-  left: 30%;
-  top: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   flex-direction: column;
   justify-content: space-between;
   align-content: space-between;
+  z-index: 999;
 }
 
 .close {

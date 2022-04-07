@@ -1,24 +1,25 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import {
   ConstructorElement,
   DragIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-item.module.css';
 import { useRef } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import {
+  useDrag,
+  useDrop,
+} from 'react-dnd';
 import { TIngredient } from "../../types";
 
-export type TIngredientWithProductId = TIngredient & 
+export type TIngredientWithProductId = TIngredient &
 { productId: string };
 
 type TProps = {
-  item: TIngredientWithProductId, 
-  index: number, 
-  deleteIngredient: () => void, 
+  item: TIngredientWithProductId,
+  index: number,
+  deleteIngredient: () => void,
   moveItem: (dragIndex: number, hoverIndex: number) => void
 }
-
-
 
 export const BurgerItem: FC<TProps> = ({ item, index, deleteIngredient, moveItem }) => {
   const id = item._id;
@@ -31,7 +32,7 @@ export const BurgerItem: FC<TProps> = ({ item, index, deleteIngredient, moveItem
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(el: {id: number, index: number}, monitor) {
+    hover(el: { id: number, index: number }, monitor) {
       if (!ref.current) {
         return;
       };
