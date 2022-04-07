@@ -1,4 +1,7 @@
-import { useCallback, FC } from "react";
+import {
+  useCallback,
+  FC,
+} from "react";
 import {
   ConstructorElement,
   Button,
@@ -6,34 +9,38 @@ import {
 import styles from "./burger-constructor.module.css";
 import { OrderDetails } from "../order-details/order-details";
 import {
-  useSelector,
-  useDispatch
-} from 'react-redux';
-import {
   DELETE_ITEM,
   DECREASE_ITEM,
   UPDATE_CONSTRUCTOR,
-} from "../../services/actions/ingredients";
+} from "../../services/actions/ingredients/action-type-ingredients";
 import { calculationTotalCost } from "../../utils/functions";
-import { createOrder } from "../../services/actions/order";
-import { CLOSE_MODAL, OPEN_MODAL } from '../../services/actions/modal';
+import { createOrder } from "../../services/actions/order/order";
+import {
+  CLOSE_MODAL,
+  OPEN_MODAL,
+} from '../../services/actions/modal/action-type-modal';
 import { BurgerItem } from '../burger-item/burger-item';
 import { TotalCost } from "../total-cost/total-cost";
 import { useDrop } from 'react-dnd';
 import { useHistory } from "react-router-dom";
 import { Modal } from "../modal/modal";
 import { TIngredient } from "../../types";
+import {
+  useDispatch,
+  useSelector,
+} from "../../utils/hooks";
 
 type TProps = {
-	handlerDrop: (item: TIngredient) => void;
+  handlerDrop: (item: TIngredient) => void;
 };
 
-type TIngredientWithProductId = TIngredient & 
+type TIngredientWithProductId = TIngredient &
 { productId: string };
 
-export const BurgerConstructor: FC<TProps> = ({ handlerDrop}) => {
-  const { bun, notBun } = useSelector((store: {ingredients: {burgerIngredients: {bun: TIngredientWithProductId, notBun: Array<TIngredientWithProductId>}}}) => store.ingredients.burgerIngredients);
-  const { visible } = useSelector((store: {modal: {visible: boolean}}) => store.modal)
+export const BurgerConstructor: FC<TProps> = ({ handlerDrop }) => {
+  const { bun, notBun } = useSelector((store) => store.ingredients.burgerIngredients);
+  const { visible } = useSelector((store) => store.modal);
+  const { isAuth } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -57,14 +64,12 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop}) => {
     }),
   });
 
-  const { isAuth } = useSelector((store: {user: {isAuth: boolean}}) => store.user);
-
   const handlerClick = () => {
     if (isAuth) {
       const ingredients_id = notBun.map((el: TIngredientWithProductId) => el._id)
       dispatch(
         createOrder(
-          [bun._id, ...ingredients_id]
+          [bun?._id, ...ingredients_id]
         )
       );
       dispatch({
@@ -81,6 +86,7 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop}) => {
   const isActive = canDrop && isHover;
   const classStyle = isActive ? 'active' : canDrop ? 'candrop' : '';
   const classForNotBun = (notBun.length || bun) && classStyle;
+  const classStyles = classForNotBun ? classForNotBun : classStyle;
 
   return (
     <div className={`${styles.container} pl-4`} ref={drop}>
@@ -95,7 +101,7 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop}) => {
         </div>
       }
 
-      <div className={`${styles.ingredients} ${styles[classForNotBun]}`}>
+      <div className={`${styles.ingredients} ${styles[classStyles]}`}>
         {bun && <div className='mr-10'>
           <ConstructorElement
             type="top"
@@ -155,7 +161,7 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop}) => {
       </div>
 
       <div className={`${styles.order} mt-10 mr-10`}>
-        {(notBun.length || bun) ? <TotalCost price={calculationTotalCost(bun, notBun)} /> : null}
+        {(notBun.length && bun) ? <TotalCost price={calculationTotalCost(bun, notBun)} /> : null}
         {bun &&
           <Button type="primary" size="large" onClick={handlerClick}>
             Оформить заказ

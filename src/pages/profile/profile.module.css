@@ -1,9 +1,8 @@
 .container {
-    margin: 20vh auto;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     max-width: 1240px;
+    height: 100%;
 }
 
 .links {
@@ -11,7 +10,7 @@
     display: flex;
     flex-direction: column;
     /* justify-content: space-evenly; */
-    padding-right: 60px;
+    /* padding-right: 60px; */
     height: 320px;
     justify-content: space-between;
 }

@@ -8,18 +8,18 @@ import {
   Button,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { forgotPassword } from '../../services/actions/password/password';
 import {
   useDispatch,
   useSelector,
-} from "react-redux";
-import { forgotPassword } from '../../services/actions/password';
+} from '../../utils/hooks';
 
 export const ForgotPassword = () => {
   const dispatch = useDispatch();
 
-  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
+  const { isAuth } = useSelector((store) => store.user);
 
-  const hasForgotPasswordRequest = useSelector((store: {password: {forgotPasswordRequest: boolean}}) => store.password.forgotPasswordRequest);
+  const hasForgotPasswordRequest = useSelector((store) => store.password.forgotPasswordRequest);
 
   const [email, setEmailValue] = useState("");
 

@@ -4,13 +4,16 @@ import {
   useEffect
 } from "react";
 import styles from "./burger-ingredients.module.css";
-import { useSelector } from 'react-redux';
 import { BurgerIngredientsList } from "../burger-ingredients-list/burger-ingredients-list";
 import { Tabs } from "../tabs/tabs";
+import { filterArray } from "../../utils/functions";
+import { useSelector } from "../../utils/hooks";
 
 export const BurgerIngredients = () => {
 
-  const { bun, sauce, main } = useSelector((store: { ingredients: { allIngredients: any } }) => store.ingredients.allIngredients);
+  const { allIngredients } = useSelector((store) => store.ingredients);
+
+  const allIngredientsArray = filterArray(allIngredients);
 
   const [type, setType] = useState('bun');
 
@@ -41,9 +44,9 @@ export const BurgerIngredients = () => {
       <Tabs type={type} onClick={setType} />
 
       <section className={styles.containerIngredients} ref={rootRef} onScroll={handlerScroll}>
-        <BurgerIngredientsList title='Булки' array={bun} id="bun" ref={bunRef} />
-        <BurgerIngredientsList title='Соусы' array={sauce} id='sauces' ref={sauceRef} />
-        <BurgerIngredientsList title='Начинки' array={main} id='main' ref={mainRef} />
+        <BurgerIngredientsList title='Булки' array={allIngredientsArray.bun} id="bun" ref={bunRef} />
+        <BurgerIngredientsList title='Соусы' array={allIngredientsArray.sauce} id='sauces' ref={sauceRef} />
+        <BurgerIngredientsList title='Начинки' array={allIngredientsArray.main} id='main' ref={mainRef} />
       </section>
     </section>
   )
