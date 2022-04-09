@@ -21,7 +21,7 @@ export const ResetPassword = () => {
   });
 
   //изменение данных в форме
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
@@ -34,12 +34,12 @@ export const ResetPassword = () => {
   };
 
   //отправка формы
-  const onSubmitForm = (e) => {
+  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(resetPassword(state));
   };
 
-  const { isAuth } = useSelector(store => store.user);
+  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
 
   if (isAuth) {
     return (

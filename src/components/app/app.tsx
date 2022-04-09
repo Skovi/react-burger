@@ -20,8 +20,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../services/actions/user";
 
-const ModalSwitch = () => {
-  const location = useLocation();
+const ModalSwitch: React.FC = () => {
+  const location = useLocation<{ background: any }>();
   const background = location.state && location.state.background;
   const hasToken = localStorage.getItem('refreshToken');
   const dispatch = useDispatch();

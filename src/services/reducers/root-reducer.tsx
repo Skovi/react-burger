@@ -12,3 +12,5 @@ export const rootReducer = combineReducers({
   password: passwordReducer,
   user: userReducer
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

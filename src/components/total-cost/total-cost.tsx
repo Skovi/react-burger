@@ -1,8 +1,12 @@
+import React, { FC } from 'react';
 import styles from "./total-cost.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 
-export const TotalCost = ({ price }) => {
+type TProps = {
+  price: number
+};
+
+export const TotalCost: FC<TProps>= ({ price }) => {
 
   return (
     <div className={`${styles.container} mr-10`}>
@@ -12,8 +16,4 @@ export const TotalCost = ({ price }) => {
       <CurrencyIcon type="primary" />
     </div>
   )
-}
-
-TotalCost.propTypes = {
-  price: PropTypes.number.isRequired,
 };

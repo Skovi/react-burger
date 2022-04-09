@@ -10,23 +10,26 @@ import { Tabs } from "../tabs/tabs";
 
 export const BurgerIngredients = () => {
 
-  const { bun, sauce, main } = useSelector(store => store.ingredients.allIngredients);
+  const { bun, sauce, main } = useSelector((store: { ingredients: { allIngredients: any } }) => store.ingredients.allIngredients);
 
   const [type, setType] = useState('bun');
 
   useEffect(() => {
-    document.querySelector(`#${type}`).scrollIntoView();
+    const scrollElement = document.querySelector(`#${type}`);
+    if (scrollElement !== null) {
+      scrollElement.scrollIntoView();
+    }
   }, [type]);
 
-  const rootRef = useRef(null);
-  const bunRef = useRef(null);
-  const sauceRef = useRef(null);
-  const mainRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
+  const bunRef = useRef<HTMLParagraphElement>(null);
+  const sauceRef = useRef<HTMLParagraphElement>(null);
+  const mainRef = useRef<HTMLParagraphElement>(null);
 
   const handlerScroll = () => {
-    const bunType = Math.abs(rootRef.current.getBoundingClientRect().top - bunRef.current.getBoundingClientRect().top);
-    const sauceType = Math.abs(rootRef.current.getBoundingClientRect().top - sauceRef.current.getBoundingClientRect().top);
-    const mainType = Math.abs(rootRef.current.getBoundingClientRect().top - mainRef.current.getBoundingClientRect().top);
+    const bunType = Math.abs(rootRef.current!.getBoundingClientRect().top - bunRef.current!.getBoundingClientRect().top);
+    const sauceType = Math.abs(rootRef.current!.getBoundingClientRect().top - sauceRef.current!.getBoundingClientRect().top);
+    const mainType = Math.abs(rootRef.current!.getBoundingClientRect().top - mainRef.current!.getBoundingClientRect().top);
     const minType = Math.min(bunType, sauceType, mainType);
     const currentType = minType === bunType ? 'bun' : minType === sauceType ? 'sauces' : 'main';
     setType(type => currentType === type ? type : currentType);

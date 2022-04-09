@@ -1,4 +1,4 @@
-import {
+import React, {
   useState,
   useEffect
 } from 'react';
@@ -25,7 +25,12 @@ export const FormUser = () => {
     dispatch(getUser());
   }, [dispatch]);
 
-  const { user } = useSelector(store => store.user);
+  type TUser = {
+    name: string, 
+    email: string
+  }
+
+  const { name, email } = useSelector((store: {user: TUser}) => store.user);
 
   const [state, setState] = useState({
     name: '',
@@ -34,25 +39,20 @@ export const FormUser = () => {
   });
 
   //изменение данных в форме
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  //нажатие на иконку
-  const onIconClick = () => {
-    console.log('Click!');
-  };
-
   //отправка формы
-  const onSubmitForm = (e) => {
+  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newDataUser = {
-      name: state.name !== user.name ? state.name : user.name,
-      email: state.email !== user.email ? state.email : user.email,
+      name: state.name !== name ? state.name : name,
+      email: state.email !== email ? state.email : email,
       password: state.password,
     };
 
@@ -60,17 +60,17 @@ export const FormUser = () => {
   };
 
   //нажатие на кнопку Отмена
-  const onCancel = (e) => {
+  const onCancel = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setState({
-      name: user.name,
-      email: user.email,
+      name: name,
+      email: email,
       password: '',
     });
   };
 
-  const hasName = state.name !== user.name; //изменено имя
-  const hasEmail = state.email !== user.email; //изменена почта
+  const hasName = state.name !== name; //изменено имя
+  const hasEmail = state.email !== email; //изменена почта
   const hasState = !!state.email && !!state.name; //поле имя и почта заполнены
 
   return (
@@ -82,22 +82,18 @@ export const FormUser = () => {
         error={false}
         errorText='Ошибка'
         size='default'
-        icon=''
         onChange={onChangeInput}
-        value={user.name ? user.name : state.name}
-        onIconClick={onIconClick}
+        value={name ? name : state.name}
       />
       <EmailInput
-        value={user.email ? user.email : state.email}
+        value={email ? email : state.email}
         name="email"
         onChange={onChangeInput}
-        onIconClick={onIconClick}
       />
       <PasswordInput
         value={state.password}
         name="password"
         onChange={onChangeInput}
-        onIconClick={onIconClick}
       />
 
       {(hasName || hasState) && (hasEmail || hasState) && (!!state.password && hasState)

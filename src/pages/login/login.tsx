@@ -18,8 +18,8 @@ import {
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const { isAuth } = useSelector(store => store.user);
+  const location = useLocation<{ from: any }>();
+  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
 
   const [state, setState] = useState({
     email: "",
@@ -27,7 +27,7 @@ export const Login = () => {
   });
   
   //изменение данных в форме
-  const onChangeInput = e => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value
@@ -35,14 +35,9 @@ export const Login = () => {
   };
 
   //отправка формы
-  const onSubmitForm = e => {
+  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login(state));
-  };
-
-  //нажатие на иконку
-  const onIconClick = () => {
-    console.log('Click!');
   };
 
   if (isAuth) {
@@ -64,13 +59,11 @@ export const Login = () => {
           value={state.email}
           name="email"
           onChange={onChangeInput}
-          onIconClick={onIconClick}
         />
         <PasswordInput
           value={state.password}
           name="password"
           onChange={onChangeInput}
-          onIconClick={onIconClick}
         />
         <Button
           type="primary"

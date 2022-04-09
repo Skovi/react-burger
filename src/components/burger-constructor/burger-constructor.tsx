@@ -1,5 +1,4 @@
-import { useCallback } from "react";
-import PropTypes from "prop-types";
+import { useCallback, FC } from "react";
 import {
   ConstructorElement,
   Button,
@@ -23,10 +22,18 @@ import { TotalCost } from "../total-cost/total-cost";
 import { useDrop } from 'react-dnd';
 import { useHistory } from "react-router-dom";
 import { Modal } from "../modal/modal";
+import { TIngredient } from "../../types";
 
-export const BurgerConstructor = ({ handlerDrop }) => {
-  const { bun, notBun } = useSelector(store => store.ingredients.burgerIngredients);
-  const { visible } = useSelector(store => store.modal)
+type TProps = {
+	handlerDrop: (item: TIngredient) => void;
+};
+
+type TIngredientWithProductId = TIngredient & 
+{ productId: string };
+
+export const BurgerConstructor: FC<TProps> = ({ handlerDrop}) => {
+  const { bun, notBun } = useSelector((store: {ingredients: {burgerIngredients: {bun: TIngredientWithProductId, notBun: Array<TIngredientWithProductId>}}}) => store.ingredients.burgerIngredients);
+  const { visible } = useSelector((store: {modal: {visible: boolean}}) => store.modal)
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,7 +48,7 @@ export const BurgerConstructor = ({ handlerDrop }) => {
 
   const [{ canDrop, isHover }, drop] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: TIngredientWithProductId) {
       handlerDrop(item);
     },
     collect: monitor => ({
@@ -50,11 +57,11 @@ export const BurgerConstructor = ({ handlerDrop }) => {
     }),
   });
 
-  const { isAuth } = useSelector(store => store.user);
+  const { isAuth } = useSelector((store: {user: {isAuth: boolean}}) => store.user);
 
   const handlerClick = () => {
     if (isAuth) {
-      const ingredients_id = notBun.map(el => el._id)
+      const ingredients_id = notBun.map((el: TIngredientWithProductId) => el._id)
       dispatch(
         createOrder(
           [bun._id, ...ingredients_id]
@@ -70,7 +77,7 @@ export const BurgerConstructor = ({ handlerDrop }) => {
     };
   };
 
-  const style = notBun.length > 4 ? { overflowY: 'auto' } : {};
+  const style: React.CSSProperties = notBun.length > 4 ? { overflowY: 'auto' } : {};
   const isActive = canDrop && isHover;
   const classStyle = isActive ? 'active' : canDrop ? 'candrop' : '';
   const classForNotBun = (notBun.length || bun) && classStyle;
@@ -110,7 +117,7 @@ export const BurgerConstructor = ({ handlerDrop }) => {
         }
 
         <ul className={styles.notBun} style={style}>
-          {notBun.map((item, i) => {
+          {notBun.map((item: TIngredientWithProductId, i: number) => {
             const deleteIngredient = () => {
               dispatch({
                 type: DELETE_ITEM,
@@ -158,8 +165,4 @@ export const BurgerConstructor = ({ handlerDrop }) => {
       {visible && <Modal><OrderDetails /></Modal>}
     </div>
   )
-};
-
-BurgerConstructor.propTypes = {
-  handlerDrop: PropTypes.func.isRequired
 };

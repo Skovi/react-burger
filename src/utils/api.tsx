@@ -1,7 +1,7 @@
 import { apiNorma } from "./constants";
 import { getCookie } from "./functions";
 
-const request = (res) => {
+const request = (res: Response) => {
   if (res.ok) {
     return res.json();
   }
@@ -16,7 +16,7 @@ export const getProductsRequest = () => {
     .then((res) => request(res))
 };
 
-export const addOrderRequest = (ingredients) => {
+export const addOrderRequest = (ingredients: Array<string>) => {
   return fetch(`${apiNorma.url}/orders`, {
     method: 'POST',
     headers: apiNorma.headers,
@@ -28,7 +28,7 @@ export const addOrderRequest = (ingredients) => {
 };
 
 //регистрация
-export const signUpRequest = (state) => {
+export const signUpRequest = (state: {name: string, email: string, password: string}) => {
   return fetch(`${apiNorma.url}/auth/register`, {
     method: 'POST',
     headers: apiNorma.headers,
@@ -44,7 +44,7 @@ export const signUpRequest = (state) => {
 };
 
 //вход
-export const signInRequest = (state) => {
+export const signInRequest = (state: {email: string, password: string}) => {
   return fetch(`${apiNorma.url}/auth/login`, {
     method: 'POST',
     headers: apiNorma.headers,
@@ -103,7 +103,7 @@ export const refreshTokenRequest = () => {
 };
 
 //изменение данных пользователя
-export const updateUserRequest = (state) => {
+export const updateUserRequest = (state: {name: string, email: string, password: string}) => {
   return fetch(`${apiNorma.url}/auth/user`, {
     method: 'PATCH',
     mode: 'cors',
@@ -127,7 +127,7 @@ export const updateUserRequest = (state) => {
 };
 
 //восстановление пароля
-export const forgotPasswordRequest = (email) => {
+export const forgotPasswordRequest = (email: string) => {
   return fetch(`${apiNorma.url}/password-reset`, {
     method: 'POST',
     mode: 'cors',
@@ -144,7 +144,7 @@ export const forgotPasswordRequest = (email) => {
 };
 
 //смена пароля
-export const resetPasswordRequest = (state) => {
+export const resetPasswordRequest = (state: {password: string, token: number}) => {
   return fetch(`${apiNorma.url}/password-reset/reset`, {
     method: 'POST',
     mode: 'cors',

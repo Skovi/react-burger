@@ -17,26 +17,21 @@ import { forgotPassword } from '../../services/actions/password';
 export const ForgotPassword = () => {
   const dispatch = useDispatch();
 
-  const { isAuth } = useSelector(store => store.user);
+  const { isAuth } = useSelector((store:{user: { isAuth: boolean}}) => store.user);
 
-  const hasForgotPasswordRequest = useSelector(store => store.password.forgotPasswordRequest);
+  const hasForgotPasswordRequest = useSelector((store: {password: {forgotPasswordRequest: boolean}}) => store.password.forgotPasswordRequest);
 
   const [email, setEmailValue] = useState("");
 
   //изменение данных в форме
-  const onChangeEmail = (e) => {
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
   };
 
   //отправка формы
-  const onSubmitForm = e => {
+  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(forgotPassword(email));
-  };
-
-  //нажатие на иконку
-  const onIconClick = () => {
-    console.log('Click!');
   };
 
   if (isAuth) {
@@ -69,8 +64,6 @@ export const ForgotPassword = () => {
           onChange={onChangeEmail}
           value={email}
           name="email"
-          onIconClick={onIconClick}
-          icon='CloseIcon'
         />
         <Button
           type='primary'
