@@ -40,7 +40,7 @@ export const BurgerIngredients = () => {
 
   return (
     <section className={styles.container}>
-      <h1 className={`text_type_main-large mb-5`}>Соберите бургер</h1>
+      <h1 className={`text_type_main-large mb-5`} >Соберите бургер</h1>
       <Tabs type={type} onClick={setType} />
 
       <section className={styles.containerIngredients} ref={rootRef} onScroll={handlerScroll}>

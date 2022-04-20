@@ -27,7 +27,7 @@ const ModalSwitch: React.FC = () => {
   const background = location.state && location.state.background;
   const hasToken = localStorage.getItem('refreshToken');
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     if (hasToken) {
       dispatch(getUser());

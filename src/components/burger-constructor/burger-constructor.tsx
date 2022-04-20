@@ -87,7 +87,7 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop }) => {
   const classStyle = isActive ? 'active' : canDrop ? 'candrop' : '';
   const classForNotBun = (notBun.length || bun) && classStyle;
   const classStyles = classForNotBun ? classForNotBun : classStyle;
-
+  
   return (
     <div 
     className={`${styles.container} pl-4`} 
@@ -171,7 +171,7 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop }) => {
       <div className={`${styles.order} mt-10 mr-10`}>
         {(notBun.length && bun) ? <TotalCost price={calculationTotalCost(bun, notBun)} /> : null}
         {bun &&
-          <Button type="primary" size="large" onClick={handlerClick}>
+          <Button type="primary" size="large" onClick={handlerClick} >
             Оформить заказ
           </Button>
         }
