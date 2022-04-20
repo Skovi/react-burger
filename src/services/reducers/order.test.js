@@ -253,5 +253,4 @@ describe('orderReducer', () => {
       feedOrders: null
     }))
   })
-
 });

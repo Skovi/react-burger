@@ -13,7 +13,6 @@ import {
 import { GET_ITEMS_FAILED } from "../actions/ingredients/action-creator-ingredients";
 import { data } from "../../utils/data";
 
-
 describe('ingredientsReducer', () => {
   it('должен вернуть начальное состояние', () => {
     expect(ingredientsReducer(undefined, {})).toEqual(stateIngredients)
@@ -333,119 +332,119 @@ describe('ingredientsReducer', () => {
   })
 
   it('должен обработать UPDATE_CONSTRUCTOR', () => {
-		const state = {
-			allIngredients: [],
-			burgerIngredients: {
-				bun: {
-					calories: 643,
-					carbohydrates: 85,
-					fat: 26,
-					image: "https://code.s3.yandex.net/react/code/bun-01.png",
-					image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
-					image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
-					name: "Флюоресцентная булка R2-D3",
-					price: 988,
-					productId: "7b9ae11f-cb8c-4229-a21b-7ac2e4d061a5",
-					proteins: 44,
-					type: "bun",
-					_id: "60cb6564fce49c00269d4018"
-				},
-				notBun: [
-					{
-						calories: 14,
-						carbohydrates: 11,
-						fat: 22,
-						image: "https://code.s3.yandex.net/react/code/sauce-04.png",
-						image_large: "https://code.s3.yandex.net/react/code/sauce-04-large.png",
-						image_mobile: "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
-						name: "Соус фирменный Space Sauce",
-						price: 80,
-						productId: "b3fdb2cc-da95-4093-94f9-a14420f7ea57",
-						proteins: 50,
-						type: "sauce",
-						_id: "60cb6564fce49c00269d401e"
-					},
-					{
-						calories: 30,
-						carbohydrates: 40,
-						fat: 20,
-						image: "https://code.s3.yandex.net/react/code/sauce-02.png",
-						image_large: "https://code.s3.yandex.net/react/code/sauce-02-large.png",
-						image_mobile: "https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
-						name: "Соус Spicy-X",
-						price: 90,
-						productId: "cba024bb-2195-4982-93ba-5e873341f463",
-						proteins: 30,
-						type: "sauce",
-						_id: "60cb6564fce49c00269d401d"
-					}
-				],
-				counts: {}
-			},
+    const state = {
+      allIngredients: [],
+      burgerIngredients: {
+        bun: {
+          calories: 643,
+          carbohydrates: 85,
+          fat: 26,
+          image: "https://code.s3.yandex.net/react/code/bun-01.png",
+          image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+          image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+          name: "Флюоресцентная булка R2-D3",
+          price: 988,
+          productId: "7b9ae11f-cb8c-4229-a21b-7ac2e4d061a5",
+          proteins: 44,
+          type: "bun",
+          _id: "60cb6564fce49c00269d4018"
+        },
+        notBun: [
+          {
+            calories: 14,
+            carbohydrates: 11,
+            fat: 22,
+            image: "https://code.s3.yandex.net/react/code/sauce-04.png",
+            image_large: "https://code.s3.yandex.net/react/code/sauce-04-large.png",
+            image_mobile: "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+            name: "Соус фирменный Space Sauce",
+            price: 80,
+            productId: "b3fdb2cc-da95-4093-94f9-a14420f7ea57",
+            proteins: 50,
+            type: "sauce",
+            _id: "60cb6564fce49c00269d401e"
+          },
+          {
+            calories: 30,
+            carbohydrates: 40,
+            fat: 20,
+            image: "https://code.s3.yandex.net/react/code/sauce-02.png",
+            image_large: "https://code.s3.yandex.net/react/code/sauce-02-large.png",
+            image_mobile: "https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
+            name: "Соус Spicy-X",
+            price: 90,
+            productId: "cba024bb-2195-4982-93ba-5e873341f463",
+            proteins: 30,
+            type: "sauce",
+            _id: "60cb6564fce49c00269d401d"
+          }
+        ],
+        counts: {}
+      },
       isLoading: false,
       hasError: false,
       loaded: true,
-		}
-		expect(
-			ingredientsReducer(state, {
-				type: UPDATE_CONSTRUCTOR,
-				hoverIndex: 0,
-				dragIndex: 1,
-			})
-		).toEqual({
-			allIngredients: [],
-			burgerIngredients: {
-				bun: {
-					calories: 643,
-					carbohydrates: 85,
-					fat: 26,
-					image: "https://code.s3.yandex.net/react/code/bun-01.png",
-					image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
-					image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
-					name: "Флюоресцентная булка R2-D3",
-					price: 988,
-					productId: "7b9ae11f-cb8c-4229-a21b-7ac2e4d061a5",
-					proteins: 44,
-					type: "bun",
-					_id: "60cb6564fce49c00269d4018"
-				},
-				notBun: [
-					{
-						calories: 30,
-						carbohydrates: 40,
-						fat: 20,
-						image: "https://code.s3.yandex.net/react/code/sauce-02.png",
-						image_large: "https://code.s3.yandex.net/react/code/sauce-02-large.png",
-						image_mobile: "https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
-						name: "Соус Spicy-X",
-						price: 90,
-						productId: "cba024bb-2195-4982-93ba-5e873341f463",
-						proteins: 30,
-						type: "sauce",
-						_id: "60cb6564fce49c00269d401d"
-					},
-					{
-						calories: 14,
-						carbohydrates: 11,
-						fat: 22,
-						image: "https://code.s3.yandex.net/react/code/sauce-04.png",
-						image_large: "https://code.s3.yandex.net/react/code/sauce-04-large.png",
-						image_mobile: "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
-						name: "Соус фирменный Space Sauce",
-						price: 80,
-						productId: "b3fdb2cc-da95-4093-94f9-a14420f7ea57",
-						proteins: 50,
-						type: "sauce",
-						_id: "60cb6564fce49c00269d401e"
-					},
-				],
-				counts: {}
-			},
-			isLoading: false,
+    }
+    expect(
+      ingredientsReducer(state, {
+        type: UPDATE_CONSTRUCTOR,
+        hoverIndex: 0,
+        dragIndex: 1,
+      })
+    ).toEqual({
+      allIngredients: [],
+      burgerIngredients: {
+        bun: {
+          calories: 643,
+          carbohydrates: 85,
+          fat: 26,
+          image: "https://code.s3.yandex.net/react/code/bun-01.png",
+          image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+          image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+          name: "Флюоресцентная булка R2-D3",
+          price: 988,
+          productId: "7b9ae11f-cb8c-4229-a21b-7ac2e4d061a5",
+          proteins: 44,
+          type: "bun",
+          _id: "60cb6564fce49c00269d4018"
+        },
+        notBun: [
+          {
+            calories: 30,
+            carbohydrates: 40,
+            fat: 20,
+            image: "https://code.s3.yandex.net/react/code/sauce-02.png",
+            image_large: "https://code.s3.yandex.net/react/code/sauce-02-large.png",
+            image_mobile: "https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
+            name: "Соус Spicy-X",
+            price: 90,
+            productId: "cba024bb-2195-4982-93ba-5e873341f463",
+            proteins: 30,
+            type: "sauce",
+            _id: "60cb6564fce49c00269d401d"
+          },
+          {
+            calories: 14,
+            carbohydrates: 11,
+            fat: 22,
+            image: "https://code.s3.yandex.net/react/code/sauce-04.png",
+            image_large: "https://code.s3.yandex.net/react/code/sauce-04-large.png",
+            image_mobile: "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+            name: "Соус фирменный Space Sauce",
+            price: 80,
+            productId: "b3fdb2cc-da95-4093-94f9-a14420f7ea57",
+            proteins: 50,
+            type: "sauce",
+            _id: "60cb6564fce49c00269d401e"
+          },
+        ],
+        counts: {}
+      },
+      isLoading: false,
       hasError: false,
       loaded: true,
-		})
-	})
+    })
+  })
 
   it('должен обработать CLEAR_CONSTRUCTOR', () => {
     const state = {
@@ -509,4 +508,4 @@ describe('ingredientsReducer', () => {
       }
     }))
   })
-})
+});

@@ -90,5 +90,4 @@ describe('SocketReducer', () => {
       totalToday: orders.totalToday
     }))
   })
-
 });

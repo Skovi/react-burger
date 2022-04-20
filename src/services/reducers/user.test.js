@@ -37,7 +37,7 @@ describe('userReducer', () => {
       registerRequest: true,
       registerFailed: false,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -53,7 +53,7 @@ describe('userReducer', () => {
         },
       })
     ).toEqual(expect.objectContaining({
-      isAuth: true, 
+      isAuth: true,
       registerRequest: false,
       registerFailed: false,
       user: {
@@ -72,7 +72,7 @@ describe('userReducer', () => {
       registerRequest: false,
       registerFailed: true,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -87,7 +87,7 @@ describe('userReducer', () => {
       loginRequest: true,
       loginFailed: false,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -122,7 +122,7 @@ describe('userReducer', () => {
       loginRequest: false,
       loginFailed: true,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -137,7 +137,7 @@ describe('userReducer', () => {
       logoutRequest: true,
       logoutFailed: false,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -164,7 +164,7 @@ describe('userReducer', () => {
       logoutFailed: true,
       logoutRequest: false,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -179,7 +179,7 @@ describe('userReducer', () => {
       getUserRequest: true,
       getUserFailed: false,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -195,9 +195,9 @@ describe('userReducer', () => {
         },
       })
     ).toEqual(expect.objectContaining({
-      isAuth: true, 
+      isAuth: true,
       getUserRequest: false,
-        getUserFailed: false,
+      getUserFailed: false,
       user: {
         name: 'Test',
         email: 'test@test.ts'
@@ -214,7 +214,7 @@ describe('userReducer', () => {
       getUserRequest: false,
       getUserFailed: true,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -260,7 +260,7 @@ describe('userReducer', () => {
       updateUserRequest: true,
       updateUserFailed: false,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
@@ -276,7 +276,7 @@ describe('userReducer', () => {
         },
       })
     ).toEqual(expect.objectContaining({
-      isAuth: true, 
+      isAuth: true,
       updateUserFailed: false,
       updateUserRequest: false,
       user: {
@@ -295,9 +295,9 @@ describe('userReducer', () => {
       updateUserFailed: true,
       updateUserRequest: false,
       user: {
-        email: "", 
+        email: "",
         name: ""
       }
     }))
   })
-})
+});
