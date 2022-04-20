@@ -10,13 +10,13 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import {
   getUser,
   updateUser
-} from '../../services/actions/user';
+} from '../../services/actions/user/user';
+import {
+  useDispatch,
+  useSelector,
+} from '../../utils/hooks';
 
 export const FormUser = () => {
   const dispatch = useDispatch();
@@ -25,12 +25,7 @@ export const FormUser = () => {
     dispatch(getUser());
   }, [dispatch]);
 
-  type TUser = {
-    name: string, 
-    email: string
-  }
-
-  const { name, email } = useSelector((store: {user: TUser}) => store.user);
+  const { name, email } = useSelector((store) => store.user.user);
 
   const [state, setState] = useState({
     name: '',

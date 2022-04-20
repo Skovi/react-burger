@@ -5,13 +5,13 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.24",
     "@types/node": "^12.20.37",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
+    "enzyme": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dnd": "^14.0.4",
@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:cy": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -51,12 +52,22 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.16.7",
+    "@testing-library/react": "^11.2.7",
+    "@types/enzyme": "^3.10.12",
     "@types/react-dnd": "^3.0.2",
     "@types/react-dnd-html5-backend": "^3.0.2",
     "@types/react-redux": "^7.1.22",
     "@types/react-router-dom": "^5.3.3",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^8.3.4",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
+    "cypress": "^9.5.4",
+    "eslint-plugin-cypress": "^2.12.1",
+    "fetch-mock": "^9.11.0",
+    "react-test-renderer": "^18.0.0",
+    "redux-mock-store": "^1.5.4"
   }
 }

@@ -1,10 +1,13 @@
-import React, { useEffect, FC } from 'react';
+import React, { 
+  useEffect, 
+  FC, 
+} from 'react';
 import ReactDOM from "react-dom";
 import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import { useHistory } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/hooks';
 
 type TProps = {
   children: React.ReactNode
@@ -14,10 +17,10 @@ export const Modal: FC<TProps> = ({ children }) => {
 
   const history = useHistory();
 
-  const { visible, callback } = useSelector((store: {modal: {visible: boolean, callback: () => void}}) => store.modal);
+  const { visible, callback } = useSelector((store) => store.modal);
 
   const onCloseGoBack = () => {
-    if (visible) {
+    if (visible && callback) {
       callback();
     } else {
       history.goBack();
