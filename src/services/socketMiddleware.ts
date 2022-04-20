@@ -71,7 +71,6 @@ export const socketMiddleware = (
         connected = false;
       };
 
-
       if (socketSendMessage && type === socketSendMessage && socket) {
         const message = token ? { ...payload, token } : { ...payload };
         socket.send(JSON.stringify(message));

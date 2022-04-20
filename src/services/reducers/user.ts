@@ -33,6 +33,7 @@ export const userReducer = (state = stateUser, action: TUserActions): TStateUser
       return {
         ...state,
         registerRequest: true,
+        registerFailed: false,
       };
     }
     case REGISTER_SUCCESS: {

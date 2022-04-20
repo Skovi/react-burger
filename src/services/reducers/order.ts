@@ -90,7 +90,11 @@ export const orderReducer = (state = stateOrder, action: TOrderActions): TStateO
       };
     }
     case GET_USER_ORDERS_FAILED: {
-      return { ...state, orderFailed: true, orderRequest: false };
+      return {
+        ...state,
+        orderFailed: true,
+        orderRequest: false
+      };
     }
 
     default: {

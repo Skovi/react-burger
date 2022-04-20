@@ -1,11 +1,10 @@
-import { 
+import {
   stateIngredients,
-   TStateIngredients,
-   } from "../initial-state/state-ingredients";
+  TStateIngredients,
+} from "../initial-state/state-ingredients";
 import {
   GET_ITEMS_REQUEST,
   GET_ITEMS_SUCCESS,
-
   ADD_ITEM,
   DELETE_ITEM,
   INCREASE_ITEM,

@@ -26,7 +26,7 @@ export const BurgerIngredient: FC<TProps> = ({ item, id }) => {
   });
 
   return (
-    <li className={styles.card} ref={drag} >
+    <li className={styles.card} ref={drag}>
       <img className={`${styles.image} mb-1`} src={item.image_large} alt={item.name} />
       {count ?
         <Counter count={count} size='small' /> : null

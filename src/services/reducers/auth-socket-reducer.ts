@@ -21,7 +21,7 @@ export const AuthSocketReducer = (state = stateAuthSocket, action: TAuthSocketAc
     case AUTH_SOCKET_ERROR:
       return {
         ...state,
-        error: action.payload,
+        hasError: action.payload,
         isConnected: false
       };
 

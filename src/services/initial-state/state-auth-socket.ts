@@ -3,7 +3,7 @@ import { TOrder } from "../../types";
 
 export type TStateAuthSocket = {
   isConnected: Boolean;
-  error: PayloadAction | null;
+  hasError: PayloadAction | null;
   orders: Array<TOrder>;
   total: number | null;
   totalToday: number | null;
@@ -11,7 +11,7 @@ export type TStateAuthSocket = {
 
 export const stateAuthSocket: TStateAuthSocket = {
   isConnected: false,
-  error: null,
+  hasError: null,
   orders: [],
   total: null,
   totalToday: null,

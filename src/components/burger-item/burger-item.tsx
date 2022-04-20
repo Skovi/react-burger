@@ -78,7 +78,7 @@ export const BurgerItem: FC<TProps> = ({ item, index, deleteIngredient, moveItem
   drag(drop(ref));
 
   return (
-    <li className={`${styles.item}`} ref={ref} style={{ opacity }}>
+    <li className={`${styles.item}`} ref={ref} style={{ opacity }} data-cy='ingredient'>
       <DragIcon type="primary" />
       <ConstructorElement
         text={item.name}

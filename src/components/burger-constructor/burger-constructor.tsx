@@ -89,7 +89,11 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop }) => {
   const classStyles = classForNotBun ? classForNotBun : classStyle;
 
   return (
-    <div className={`${styles.container} pl-4`} ref={drop}>
+    <div 
+    className={`${styles.container} pl-4`} 
+    ref={drop}
+    data-cy='drop-target'
+    >
       {(!bun && notBun.length < 1) &&
         <div className={`${styles.emptyContainer} ${styles[classStyle]}`}>
           <h1 className="text text_type_main-large text_color_inactive mb-10">
@@ -101,7 +105,7 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop }) => {
         </div>
       }
 
-      <div className={`${styles.ingredients} ${styles[classStyles]}`}>
+      <div className={`${styles.ingredients} ${styles[classStyles]}`} data-cy="up-bun">
         {bun && <div className='mr-10'>
           <ConstructorElement
             type="top"
@@ -122,7 +126,11 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop }) => {
           ""
         }
 
-        <ul className={styles.notBun} style={style}>
+        <ul 
+        className={styles.notBun} 
+        style={style}
+        data-cy="other-ingredients-container"
+        >
           {notBun.map((item: TIngredientWithProductId, i: number) => {
             const deleteIngredient = () => {
               dispatch({
@@ -148,7 +156,7 @@ export const BurgerConstructor: FC<TProps> = ({ handlerDrop }) => {
           }
         </ul>
 
-        {bun && <div className='mr-10'>
+        {bun && <div className='mr-10' data-cy="down-bun">
           <ConstructorElement
             type="bottom"
             isLocked={true}

@@ -50,7 +50,6 @@ export const passwordReducer = (state = statePassword, action: TPasswordActions)
         ...state,
         resetPasswordFailed: false,
         resetPasswordRequest: false,
-
       };
     }
     case RESET_PASSWORD_FAILED: {
