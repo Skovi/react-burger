@@ -1,29 +1,29 @@
-# Бургерная на краю Вселенной “Stellar Burgers”
+## Бургерная на краю Вселенной “Stellar Burgers”
+Одностраничное приложение Stellar Burger разработано в рамках интенсива "React-разработчик" факультета Веб-разработки Yandex.Praktikum. Представляет собой сервис для подбора бургера по своему вкусу, зарегистрированные клиенты могут оформлять онлайн-заказ. База данных пользователей и заказы хранится на сервере, защищенном политикой безопасности и входящей валидацией запросов.
 
-## [Страница на GitHub Pages](https://skovi.github.io/react-burger/).
+### [Страница на GitHub Pages](https://skovi.github.io/react-burger/).
 
-### Технологии:
+#### Технологии:
 * React
 * TypeScript
 * Redux
 * React Router
-* CSS-модули
+* CSS Modules
 * Fetch API
 * React-DND
 * WebSockets
-* Cookie && Local Storage
-* 6 Cypress-тестов
-* 60 Jest-тестов всех reducer
+* Cookie & Local Storage
+* Cypress & Jest
 
-### Установка:
+#### Установка:
 * Клонировать репозиторий
 * Запустить `npm i` для установки зависимостей
 * Запустить `npm start` для запуска приложения в режиме разработки
 * Открыть [http://localhost:3000/](http://localhost:3000/)
 
-### Запуск Cypress-тестов:
+#### Запуск Cypress-тестов:
 * Запустить `npm start` для запуска приложения в режиме разработки
 * Запустить `npm run cypress` в другом окне терминала
 
-### Запуск Jest-тестов
+#### Запуск Jest-тестов
 * Запустить `npm run test`
