@@ -89,7 +89,7 @@ export const ResetPassword = () => {
           Вспомнили пароль?
         </p>
         <Link
-          to='/forgot-password'
+          to='/login'
           className={`${styles.link} text text_type_main-default`}
         >
           Войти

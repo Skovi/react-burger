@@ -41,43 +41,35 @@ const ModalSwitch: React.FC = () => {
           <Main />
         </Route>
         <Route path='/login' exact>
-          {' '}
           {/*страница авторизации*/}
           <Login />
         </Route>
         <Route path='/register' exact>
-          {' '}
           {/*страница регистрации*/}
           <Register />
         </Route>
         <Route path='/forgot-password' exact>
-          {' '}
           {/*страница восстановления пароля*/}
           <ForgotPassword />
         </Route>
         <Route path='/reset-password' exact>
-          {' '}
           {/*страница сброса пароля*/}
           <ResetPassword />
         </Route>
         <Route path='/feed' exact>
-          {' '}
           {/*страница ленты заказов. Доступен всем пользователям.*/}
           <Feed />
         </Route>
         <Route path='/feed/:number' exact>
-          {' '}
           {/*страница заказа в ленте. Доступен всем пользователям.*/}
           <Order />
         </Route>
         <ProtectedRoute path='/profile/orders/:number' exact children={<Order />} />
         <ProtectedRoute path='/profile'>
-          {' '}
           {/*страница с настройками профиля*/}
           <Profile />
         </ProtectedRoute>
         <Route path='/ingredients/:id' exact>
-          {' '}
           {/*страница ингредиента*/}
           <IngredientDetails />
         </Route>
