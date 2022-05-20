@@ -118,7 +118,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Router>
+    <Router basename='/react-burger'>
       <AppHeader />
       <ModalSwitch />
     </Router>
